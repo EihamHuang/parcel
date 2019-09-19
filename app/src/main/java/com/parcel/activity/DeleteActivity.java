@@ -1,15 +1,20 @@
-package com.example.parcel;
+package com.parcel.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.widget.Toast;
 import android.widget.ListView;
 import android.support.v4.widget.SwipeRefreshLayout;
+
+import com.example.parcel.R;
+import com.parcel.adapter.MyAdapterOrderDelete;
+import com.parcel.data.GetParcel;
+import com.parcel.data.MyUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +23,14 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.UpdateListener;
 
-public class MyOrderActivity extends AppCompatActivity {
+public class DeleteActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swiperereshlayout;
     private ListView listview;
-    private MyAdapterOrderNow adapter;
+    private MyAdapterOrderDelete adapter;
     private List<GetParcel> data;           // 获取信息信息
     private BmobQuery<GetParcel> query;     // 后端信息队列
     private String time = "";
@@ -38,7 +44,7 @@ public class MyOrderActivity extends AppCompatActivity {
         // 设置数据适配器
         data = new ArrayList<GetParcel>();
         initData();
-        adapter = new MyAdapterOrderNow(data, this);
+        adapter = new MyAdapterOrderDelete(data, this);
         listview = (ListView)findViewById(R.id.listview);
         listview.setAdapter(adapter);
 
@@ -71,39 +77,55 @@ public class MyOrderActivity extends AppCompatActivity {
         });
 
         // 按钮监听
-        adapter.setOnBtnClickListener(new MyAdapterOrderNow.onBtnClickListener() {
+        adapter.setOnBtnClickListener(new MyAdapterOrderDelete.onBtnClickListener() {
             @Override
             public void onBtnClick(final int position) {
                 gp = data.get(position);
-                AlertDialog.Builder alterDialog = new AlertDialog.Builder(MyOrderActivity.this);
-                alterDialog.setTitle("提示");
-                alterDialog.setMessage("确定收货吗？");
-                alterDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                BmobQuery<GetParcel> gp_list = new BmobQuery<GetParcel>();
+                gp_list.getObject(gp.getObjectId(), new QueryListener<GetParcel>() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        gp.setStatus(2);
-                        gp.update(gp.getObjectId(), new UpdateListener() {
-                            @Override
-                            public void done(BmobException e) {
-                                if(e==null){
-                                    data.remove(position);
-                                    adapter.notifyDataSetChanged();
-                                    Toast.makeText(MyOrderActivity.this, "收货成功！", Toast.LENGTH_SHORT).show();
-                                }else{
-                                    Toast.makeText(MyOrderActivity.this, "收货失败！" + e.getMessage() + e.getErrorCode(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                    public void done(GetParcel getParcel, BmobException e) {
+                        if(e==null){
+                            if(getParcel.getStatus()==0){
+                                AlertDialog.Builder alterDialog = new AlertDialog.Builder(DeleteActivity.this);
+                                alterDialog.setTitle("提示");
+                                alterDialog.setMessage("确定删除吗？");
+                                alterDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        gp.delete(gp.getObjectId(), new UpdateListener() {
+                                            @Override
+                                            public void done(BmobException e) {
+                                                if(e==null){
+                                                    data.remove(position);
+                                                    adapter.notifyDataSetChanged();
+                                                    Toast.makeText(DeleteActivity.this,"删除成功！",Toast.LENGTH_SHORT).show();
+                                                }else{
+                                                    Toast.makeText(DeleteActivity.this,"删除失败！" + e.getMessage() + e.getErrorCode(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
 
-            }
-                });
-                alterDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MyOrderActivity.this,"点击取消",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                alterDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+//                        Toast.makeText(DeleteActivity.this,"点击取消",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                alterDialog.show();
+                            }else{
+                                data.remove(position);
+                                adapter.notifyDataSetChanged();
+                                Toast.makeText(DeleteActivity.this,"晚了，该订单已被人接下！",Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(DeleteActivity.this,"查询出错！" + e.getMessage() + e.getErrorCode(), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
-                alterDialog.show();
+
 
             }
         });
@@ -113,14 +135,14 @@ public class MyOrderActivity extends AppCompatActivity {
     // 初始化数据
     public void initData(){
         query = new BmobQuery<GetParcel>();
-        query.addWhereEqualTo("status",1);
+        query.addWhereEqualTo("status",0);
         query.order("createdAt");
         query.include("uper,downer");
         query.findObjects(new FindListener<GetParcel>() {
             @Override
             public void done(List<GetParcel> list, BmobException e) {
                 if(list.size()<=0){
-                    Toast.makeText(MyOrderActivity.this, "当前还没有被接受的订单哦" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeleteActivity.this, "当前还没有已发布的订单哦" , Toast.LENGTH_SHORT).show();
                 }else {
                     if (e == null) {
                         for(GetParcel gp:list) {
@@ -131,7 +153,7 @@ public class MyOrderActivity extends AppCompatActivity {
                         time = list.get(0).getCreatedAt();
                         Log.d("截止时间是：", time);
                     } else {
-                        Toast.makeText(MyOrderActivity.this, "获取信息失败！" + e.getMessage() + e.getErrorCode(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DeleteActivity.this, "获取信息失败！" + e.getMessage() + e.getErrorCode(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -141,7 +163,7 @@ public class MyOrderActivity extends AppCompatActivity {
     // 上垃获取数据
     public void getInformation(){
         query = new BmobQuery<GetParcel>();
-        query.addWhereEqualTo("status",1);
+        query.addWhereEqualTo("status",0);
         query.order("createdAt");
         query.include("uper,downer");
         query.findObjects(new FindListener<GetParcel>() {
@@ -157,11 +179,10 @@ public class MyOrderActivity extends AppCompatActivity {
                         }
                     }
                 }else {
-                    Toast.makeText(MyOrderActivity.this, "获取信息失败！" + e.getMessage() + e.getErrorCode(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeleteActivity.this, "获取信息失败！" + e.getMessage() + e.getErrorCode(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
 }
-

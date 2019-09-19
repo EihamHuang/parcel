@@ -1,4 +1,4 @@
-package com.example.parcel;
+package com.parcel.data;
 
 import cn.bmob.v3.BmobInstallation;
 public class Installation extends BmobInstallation {

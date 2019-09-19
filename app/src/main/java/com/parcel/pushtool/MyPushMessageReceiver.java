@@ -1,4 +1,4 @@
-package com.example.parcel;
+package com.parcel.pushtool;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,6 +10,10 @@ import android.app.PendingIntent;
 
 import cn.bmob.push.PushConstants;
 import android.support.v4.app.NotificationCompat;
+
+import com.example.parcel.R;
+import com.parcel.activity.MainActivity;
+
 import org.json.JSONObject;
 import org.json.JSONException;
 

@@ -1,4 +1,4 @@
-package com.example.parcel;
+package com.parcel.activity;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.parcel.R;
+import com.parcel.data.MyUser;
+
 public class RegisterActivity extends AppCompatActivity {
     EditText et_register_username;
     EditText et_register_password;

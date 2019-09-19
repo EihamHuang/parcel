@@ -1,4 +1,6 @@
-package com.example.parcel;
+package com.parcel.chat;
+
+import com.parcel.data.MyUser;
 
 import cn.bmob.v3.BmobObject;
 

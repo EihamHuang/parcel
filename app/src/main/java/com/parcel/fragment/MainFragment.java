@@ -1,4 +1,4 @@
-package com.example.parcel;
+package com.parcel.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,12 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.content.Intent;
-import android.widget.ImageView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.widget.Toast;
 import android.widget.ListView;
 import android.support.v4.widget.SwipeRefreshLayout;
+
+import com.example.parcel.R;
+import com.parcel.activity.AddActivity;
+import com.parcel.activity.DeleteActivity;
+import com.parcel.data.GetParcel;
+import com.parcel.adapter.MyAdapter;
+import com.parcel.data.MyUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +62,7 @@ public class MainFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_add = new Intent(context,AddActivity.class);
+                Intent intent_add = new Intent(context, AddActivity.class);
                 startActivity(intent_add);
             }
         });
@@ -64,7 +71,7 @@ public class MainFragment extends Fragment {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_delete = new Intent(context,DeleteActivity.class);
+                Intent intent_delete = new Intent(context, DeleteActivity.class);
                 startActivity(intent_delete);
             }
         });

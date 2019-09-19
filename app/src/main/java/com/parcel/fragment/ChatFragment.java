@@ -1,15 +1,12 @@
-package com.example.parcel;
+package com.parcel.fragment;
 
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
-import android.app.Activity;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,12 +16,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.parcel.R;
+import com.parcel.chat.FlusMessage;
+import com.parcel.data.GetParcel;
+import com.parcel.chat.IMessage;
+import com.parcel.data.MyUser;
+
 import java.util.List;
 
 public class ChatFragment extends Fragment {
     private List<GetParcel> data;           // 获取信息信息
     private GetParcel gp;
-    static TextView showTxt;
+    public static TextView showTxt;
     private EditText editText;
     private Button button;
     private Context context;

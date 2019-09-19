@@ -1,4 +1,4 @@
-package com.example.parcel;
+package com.parcel.fragment;
 
 import android.content.Intent;
 import android.content.Context;
@@ -11,18 +11,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
-import java.util.ArrayList;
+
+import com.example.parcel.R;
+import com.parcel.activity.AboutusActivity;
+import com.parcel.data.Installation;
+import com.parcel.activity.LoginActivity;
+import com.parcel.activity.MyOrderAcceptActivity;
+import com.parcel.activity.MyOrderActivity;
+import com.parcel.data.MyUser;
+import com.parcel.activity.SearchActivity;
+
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.BmobInstallationManager;
-import cn.bmob.v3.BmobPushManager;
-import cn.bmob.v3.BmobInstallation;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.PushListener;
-import cn.bmob.v3.listener.UpdateListener;
 import rx.functions.Action1;
 
 public class MeFragment extends Fragment {
@@ -58,7 +61,7 @@ public class MeFragment extends Fragment {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_login = new Intent(context,SearchActivity.class);
+                Intent intent_login = new Intent(context, SearchActivity.class);
                 startActivity(intent_login);
             }
         });
@@ -66,7 +69,7 @@ public class MeFragment extends Fragment {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent3= new Intent(context,AboutusActivity.class);
+                Intent intent3= new Intent(context, AboutusActivity.class);
                 startActivity(intent3);
             }
         });
@@ -81,7 +84,7 @@ public class MeFragment extends Fragment {
         ord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_order = new Intent(context,MyOrderActivity.class);
+                Intent intent_order = new Intent(context, MyOrderActivity.class);
                 startActivity(intent_order);
             }
         });
@@ -89,7 +92,7 @@ public class MeFragment extends Fragment {
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_accept = new Intent(context,MyOrderAcceptActivity.class);
+                Intent intent_accept = new Intent(context, MyOrderAcceptActivity.class);
                 startActivity(intent_accept);
             }
         });

@@ -1,15 +1,18 @@
-package com.example.parcel;
+package com.parcel.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.widget.Toast;
 import android.widget.ListView;
 import android.support.v4.widget.SwipeRefreshLayout;
+
+import com.example.parcel.R;
+import com.parcel.adapter.MyAdapterOrderAccept;
+import com.parcel.data.GetParcel;
+import com.parcel.data.MyUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +21,6 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.UpdateListener;
 
 public class MyOrderAcceptActivity extends AppCompatActivity {
 

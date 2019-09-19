@@ -1,4 +1,4 @@
-package com.example.parcel;
+package com.parcel.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +9,14 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.example.parcel.R;
+import com.parcel.data.Installation;
+import com.parcel.data.MyUser;
+import com.parcel.fragment.ChatFragment;
+import com.parcel.fragment.MainFragment;
+import com.parcel.fragment.MeFragment;
+
 import java.util.List;
 
 import cn.bmob.push.BmobPush;
@@ -18,7 +26,6 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.InstallationListener;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.UpdateListener;
 import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity {

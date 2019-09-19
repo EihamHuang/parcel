@@ -1,4 +1,4 @@
-package com.example.parcel;
+package com.parcel.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,9 +9,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.parcel.R;
+import com.parcel.data.GetParcel;
+
 import java.util.List;
 
-public class MyAdapterOrderDelete extends BaseAdapter {
+public class MyAdapterOrderNow extends BaseAdapter {
     private List<GetParcel> data;
     private LayoutInflater inflater;
     private GetParcel gp;
@@ -29,7 +32,7 @@ public class MyAdapterOrderDelete extends BaseAdapter {
         public Button accept;
     }
 
-    public MyAdapterOrderDelete(List<GetParcel> data, Context context) {
+    public MyAdapterOrderNow(List<GetParcel> data, Context context) {
         this.data = data;
         this.inflater=LayoutInflater.from(context);
     }
@@ -63,7 +66,7 @@ public class MyAdapterOrderDelete extends BaseAdapter {
         //加载布局为一个视图
         if(convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.delete_item, null);
+            convertView = inflater.inflate(R.layout.my_order_item_now, null);
             //在视图中查找控件
             viewHolder.image_photo = (ImageView) convertView.findViewById(R.id.image_photo);
             viewHolder.tv_name = (TextView) convertView.findViewById(R.id.name);
@@ -79,12 +82,12 @@ public class MyAdapterOrderDelete extends BaseAdapter {
         }
         // 设置内容
         gp = data.get(position);
-        viewHolder.tv_name.setText(gp.getUper().getName());
+        viewHolder.tv_name.setText(gp.getDowner().getName());
         viewHolder.tv_money.setText("金额："+String.valueOf(gp.getMoney()));
         viewHolder.tv_begin.setText("起点："+gp.getBegin());
         viewHolder.tv_ending.setText("终点："+gp.getEnding());
-        viewHolder.tv_describe.setText("描述："+gp.getDescribe());
-        viewHolder.tv_time.setText("时间："+gp.getCreatedAt());
+        viewHolder.tv_describe.setText("电话："+gp.getDowner().getPhone());
+        viewHolder.tv_time.setText("时间："+gp.getUpdatedAt());
 
         viewHolder.accept.setOnClickListener(new View.OnClickListener() {
             @Override

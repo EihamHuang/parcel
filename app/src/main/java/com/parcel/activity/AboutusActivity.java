@@ -1,7 +1,9 @@
-package com.example.parcel;
+package com.parcel.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.parcel.R;
 
 
 public class AboutusActivity extends AppCompatActivity {

@@ -1,22 +1,17 @@
-package com.example.parcel;
+package com.parcel.chat;
 
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.content.Context;
 import android.widget.Toast;
+
+import com.parcel.fragment.ChatFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.BmobCallback;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.QueryListener;
-import android.widget.Toast;
 
 public class FlusMessage extends Thread {
 
@@ -25,7 +20,7 @@ public class FlusMessage extends Thread {
     String time = "";
     Context context;
     int oldLen=0;
-    String msg="",msg2="";
+    public String msg="",msg2="";
     public FlusMessage(Context context) {
         this.context = context;
     }

@@ -24,23 +24,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutusActivity"></activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name="com.parcel.activity.AboutusActivity"></activity>
+        <activity android:name="com.parcel.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name="com.parcel.activity.RegisterActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.parcel.activity.MainActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".AddActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".MyOrderActivity" />
-        <activity android:name=".MyOrderAcceptActivity" />
-        <activity android:name=".DeleteActivity" />
+        <activity android:name="com.parcel.activity.AddActivity" />
+        <activity android:name="com.parcel.activity.SearchActivity" />
+        <activity android:name="com.parcel.activity.MyOrderActivity" />
+        <activity android:name="com.parcel.activity.MyOrderAcceptActivity" />
+        <activity android:name="com.parcel.activity.DeleteActivity" />
 
         <receiver android:name="cn.bmob.newim.core.ConnectChangeReceiver">
             <intent-filter>
@@ -87,7 +87,7 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".MyPushMessageReceiver">
+        <receiver android:name="com.parcel.pushtool.MyPushMessageReceiver">
             <intent-filter>
                 <action android:name="cn.bmob.push.action.MESSAGE" />
             </intent-filter>

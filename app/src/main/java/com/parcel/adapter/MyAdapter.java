@@ -1,21 +1,26 @@
-package com.example.parcel;
+package com.parcel.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.content.Context;
+
+import com.example.parcel.R;
+import com.parcel.data.GetParcel;
 
 import java.util.List;
 
-public class MyAdapterOrderAccept extends BaseAdapter {
+
+public class MyAdapter extends BaseAdapter {
     private List<GetParcel> data;
     private LayoutInflater inflater;
     private GetParcel gp;
     private ViewHolder viewHolder;
+    private onBtnClickListener mOnBtnClickListener;
 
     public class ViewHolder{
         public ImageView image_photo;
@@ -25,11 +30,21 @@ public class MyAdapterOrderAccept extends BaseAdapter {
         public TextView tv_ending;
         public TextView tv_describe;
         public TextView tv_time;
+        public Button accept;
     }
 
-    public MyAdapterOrderAccept(List<GetParcel> data, Context context) {
+    public MyAdapter(List<GetParcel> data,Context context) {
         this.data = data;
         this.inflater=LayoutInflater.from(context);
+    }
+
+    // 按钮监听接口
+    public interface onBtnClickListener {
+        void onBtnClick(int position);
+    }
+
+    public void setOnBtnClickListener(onBtnClickListener mOnBtnClickListener) {
+        this.mOnBtnClickListener = mOnBtnClickListener;
     }
 
     @Override
@@ -52,7 +67,7 @@ public class MyAdapterOrderAccept extends BaseAdapter {
         //加载布局为一个视图
         if(convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.accept_item, null);
+            convertView = inflater.inflate(R.layout.getparcel_item, null);
             //在视图中查找控件
             viewHolder.image_photo = (ImageView) convertView.findViewById(R.id.image_photo);
             viewHolder.tv_name = (TextView) convertView.findViewById(R.id.name);
@@ -61,6 +76,7 @@ public class MyAdapterOrderAccept extends BaseAdapter {
             viewHolder.tv_ending = (TextView) convertView.findViewById(R.id.ending);
             viewHolder.tv_describe = (TextView) convertView.findViewById(R.id.describe);
             viewHolder.tv_time = (TextView) convertView.findViewById(R.id.time);
+            viewHolder.accept = (Button) convertView.findViewById(R.id.accept);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)convertView.getTag();
@@ -71,9 +87,17 @@ public class MyAdapterOrderAccept extends BaseAdapter {
         viewHolder.tv_money.setText("金额："+String.valueOf(gp.getMoney()));
         viewHolder.tv_begin.setText("起点："+gp.getBegin());
         viewHolder.tv_ending.setText("终点："+gp.getEnding());
-        viewHolder.tv_describe.setText("电话："+gp.getUper().getPhone());
-        viewHolder.tv_time.setText("描述："+gp.getDescribe());
+        viewHolder.tv_describe.setText("描述："+gp.getDescribe());
+        viewHolder.tv_time.setText("时间："+gp.getCreatedAt());
 
+        viewHolder.accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnBtnClickListener.onBtnClick(position);
+            }
+        });
         return convertView;
     }
+
+
 }
