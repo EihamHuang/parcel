@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.parcel">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".AboutusActivity"></activity>
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".AddActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".MyOrderActivity" />
+        <activity android:name=".MyOrderAcceptActivity" />
+        <activity android:name=".DeleteActivity" />
+
+        <receiver android:name="cn.bmob.newim.core.ConnectChangeReceiver">
+            <intent-filter>
+                <action android:name="cn.bmob.action.RECONNECT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="cn.bmob.newim.core.service.BmobIMService"
+            android:process=":bmobcore" />
+        <service
+            android:name="cn.bmob.newim.core.service.NotifyService"
+            android:process=":bmobcore" />
+        <service android:name="cn.bmob.newim.core.service.ReConnectService" />
+        <service android:name="cn.bmob.newim.core.service.HeartBeatService" />
+
+        <meta-data
+            android:name="Bmob_APP_KEY"
+            android:value="ced57e17be87e63476489b76d84642b4" />
+
+        <service
+            android:name="cn.bmob.push.lib.service.PushService"
+            android:exported="true"
+            android:label="PushService"
+            android:permission="cn.bmob.permission.push"
+            android:process="cn.bmob.push">
+            <intent-filter>
+                <action android:name="cn.bmob.push.lib.service.PushService" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name="cn.bmob.push.PushReceiver">
+            <intent-filter android:priority="2147483647">
+
+                <!-- 优先级加最高 -->
+                <!-- 系统启动完成后会调用 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <!-- 解锁完成后会调用 -->
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <!-- 监听网络连通性 -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".MyPushMessageReceiver">
+            <intent-filter>
+                <action android:name="cn.bmob.push.action.MESSAGE" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

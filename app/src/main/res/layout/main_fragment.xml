@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#FAF8F8"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swiperereshlayout"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titlename"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10sp" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fbutton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="center"
+        android:src="@drawable/plus"
+        app:backgroundTint="@android:color/transparent"
+        app:borderWidth="0.0dip"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/fbutton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="56dp"
+        tools:ignore="MissingConstraints" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fbutton2"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="68dp"
+        android:scaleType="center"
+        android:src="@drawable/minus"
+        app:backgroundTint="@android:color/transparent"
+        app:borderWidth="0.0dip"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="56dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/titlename"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:background="@color/design_default_color_primary"
+        android:gravity="center"
+        android:text="代领界面"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

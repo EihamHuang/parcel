@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Parcel</string>
+    <string name="title_main">Main</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_home">Home</string>
+
+    <string name="input_postid">请输入快递单号：</string>
+    <string name="btn_query">查询</string>
+    <string name="input_your_courier_number">input your Courier number</string>
+</resources>
